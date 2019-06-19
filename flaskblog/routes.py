@@ -1,14 +1,7 @@
-from flask import Flask, render_template, url_for, flash, redirect
-from flask_sqlalchemy import SQLAlchemy
-from forms import RegistrationForm, LoginForm
-
-
-app = Flask(__name__)
-app.config['SECRET_KEY'] = '711d59da8f46a42fd155b7eb2e5cfea5'
-app.config['SQLAlCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-db = SQLAlchemy(app)
-
-from models import User, Post
+from flask import render_template, url_for, flash, redirect
+from flaskblog import app
+from flaskblog.forms import RegistrationForm, LoginForm
+from flaskblog.models import User, Post
 
 
 
@@ -60,8 +53,3 @@ def login():
 			flash('Wrong Username/Password!', 'danger')
 			return redirect(url_for('login')	)
 	return render_template('login.html', title = 'Login', form = form)
-
-
-
-if __name__ == '__main__':
-	app.run(debug = True)
